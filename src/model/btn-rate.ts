@@ -15,15 +15,15 @@ export default class RateNutton extends PlayButton {
     this.coordinate.y = 0.53;
   }
 
-  /* public init(): void {
+  public init(): void {
     this.img = SpriteDestructor.asset('btn-rate');
-  } */
+  }
 
   public click(): void {
     // Do rate
     // Open new Tab the goto to Github Repository
 
     // Hard Coded
-    openInNewTab('https://github.com/jxmked/Flappybird');
+    openInNewTab('https://github.com/viksant/FlappyNutz');
   }
 }

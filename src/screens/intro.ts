@@ -109,10 +109,10 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     );
     // ----------------------------------
 
-    this.insertAppVersion(context);
+    /* this.insertAppVersion(context); */
   }
 
-  private insertAppVersion(context: CanvasRenderingContext2D): void {
+  /* private insertAppVersion(context: CanvasRenderingContext2D): void {
     const fSize = this.canvasSize.width * 0.04;
     const bot = this.canvasSize.height * 0.985;
     const right = this.canvasSize.width * 0.985;
@@ -124,7 +124,7 @@ export default class Introduction extends ParentClass implements IScreenChangerO
 
     // context.strokeStyle = 'black';
     // context.strokeText(`v${APP_VERSION}`, right - 2 * fSize, bot);
-  }
+  } */
 
   public mouseDown({ x, y }: ICoordinate): void {
     this.toggleSpeakerButton.mouseEvent('down', { x, y });

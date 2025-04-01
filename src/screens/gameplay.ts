@@ -15,6 +15,7 @@ import ParentClass from '../abstracts/parent-class';
 import PipeGenerator from '../model/pipe-generator';
 import ScoreBoard from '../model/score-board';
 import Sfx from '../model/sfx';
+import SocialIcons from '../model/social-icons';
 
 export type IGameState = 'died' | 'playing' | 'none';
 export default class GetReady extends ParentClass implements IScreenChangerObject {
@@ -30,6 +31,7 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
   private hideBird: boolean;
   private flashScreen: FlashScreen;
   private showScoreBoard: boolean;
+  private socialIcons: SocialIcons;
 
   constructor(game: MainGameController) {
     super();
@@ -55,6 +57,7 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
     });
     this.hideBird = false;
     this.showScoreBoard = false;
+    this.socialIcons = new SocialIcons();
 
     this.transition.setEvent([0.99, 1], this.reset.bind(this));
   }
@@ -67,6 +70,7 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
     this.setButtonEvent();
     this.flashScreen.init();
     this.transition.init();
+    this.socialIcons.init();
   }
 
   public reset(): void {
@@ -92,6 +96,7 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
     this.scoreBoard.resize(this.canvasSize);
     this.flashScreen.resize(this.canvasSize);
     this.transition.resize(this.canvasSize);
+    this.socialIcons.resize({ width, height });
   }
 
   public Update(): void {
@@ -160,6 +165,7 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
 
     this.flashScreen.Display(context);
     this.transition.Display(context);
+    this.socialIcons.Display(context);
   }
 
   private setButtonEvent(): void {
@@ -184,15 +190,20 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
   }
 
   public mouseDown({ x, y }: ICoordinate): void {
-    if (this.gameState !== 'died') return;
+    if (this.gameState === 'died') return;
 
-    this.scoreBoard.mouseDown({ x, y });
+    this.state = 'playing';
+    this.gameState = 'playing';
+    this.bannerInstruction.tap();
+    this.bird.flap();
+    this.socialIcons.mouseDown({ x, y });
   }
 
   public mouseUp({ x, y }: ICoordinate): void {
     if (this.gameState !== 'died') return;
 
     this.scoreBoard.mouseUp({ x, y });
+    this.socialIcons.mouseUp({ x, y });
   }
   public startAtKeyBoardEvent(): void {
     if (this.gameState === 'died') this.scoreBoard.triggerPlayATKeyboardEvent();

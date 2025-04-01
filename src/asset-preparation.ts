@@ -81,12 +81,15 @@ export default (callback: IEmptyFunction): void => {
     sd.cutOut('spark-lg', 276, 786, 10, 10);
     sd.cutOut('banner-game-ready', 586, 118, 192, 58);
     sd.cutOut('banner-game-over', 786, 118, 200, 52);
-    sd.cutOut('banner-flappybird', 702, 182, 178, 52);
+    sd.cutOut('banner-flappybird', 701, 558, 311, 81);
     sd.cutOut('banner-instruction', 584, 182, 114, 98);
     sd.cutOut('copyright', 886, 184, 122, 10);
     sd.cutOut('icon-plus', 992, 168, 10, 10);
     sd.cutOut('btn-mute', 816, 306, 90, 66);
     sd.cutOut('btn-speaker', 712, 306, 90, 66);
+    sd.cutOut('logo-dex', 293, 517, 41, 41);
+    sd.cutOut('logo-telegram', 293, 566, 41, 41);
+    sd.cutOut('logo-x', 293, 614, 41, 41);
 
     const loadCallback = () => {
       if (isLoaded) callback();

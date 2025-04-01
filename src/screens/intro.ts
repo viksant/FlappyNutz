@@ -10,11 +10,14 @@ import ToggleSpeaker from '../model/btn-toggle-speaker';
 import SpriteDestructor from '../lib/sprite-destructor';
 /* import { APP_VERSION } from '../constants';
  */
+import SocialIcons from '../model/social-icons';
+
 export default class Introduction extends ParentClass implements IScreenChangerObject {
   public playButton: PlayButton;
   /* public rankingButton: RankingButton; */
   /* public rateButton: RateButton; */
   public toggleSpeakerButton: ToggleSpeaker;
+  public socialIcons: SocialIcons;
 
   private bird: BirdModel;
   private flappyBirdBanner: HTMLImageElement | undefined;
@@ -27,6 +30,7 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     /* this.rankingButton = new RankingButton(); */
     /* this.rateButton = new RateButton(); */
     this.toggleSpeakerButton = new ToggleSpeaker();
+    this.socialIcons = new SocialIcons();
     this.flappyBirdBanner = void 0;
     this.copyright = void 0;
   }
@@ -37,8 +41,12 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     /* this.rankingButton.init(); */
     /* this.rateButton.init(); */
     this.toggleSpeakerButton.init();
+    this.socialIcons.init();
     this.flappyBirdBanner = SpriteDestructor.asset('banner-flappybird');
     this.copyright = SpriteDestructor.asset('copyright');
+    
+    // Centrar el botón de play horizontalmente
+    this.playButton.x = (this.canvasSize.width / 2) - (this.playButton.width / 2);
   }
 
   public resize({ width, height }: IDimension): void {
@@ -48,6 +56,7 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     /* this.rankingButton.resize({ width, height }); */
     /* this.rateButton.resize({ width, height }); */
     this.toggleSpeakerButton.resize({ width, height });
+    this.socialIcons.resize({ width, height });
   }
 
   public Update(): void {
@@ -109,6 +118,9 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     );
     // ----------------------------------
 
+    // Mostrar iconos sociales
+    this.socialIcons.Display(context);
+
     /* this.insertAppVersion(context); */
   }
 
@@ -130,7 +142,8 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     this.toggleSpeakerButton.mouseEvent('down', { x, y });
     this.playButton.mouseEvent('down', { x, y });
     /* this.rankingButton.mouseEvent('down', { x, y }); */
-   /*  this.rateButton.mouseEvent('down', { x, y }); */
+    /* this.rateButton.mouseEvent('down', { x, y }); */
+    this.socialIcons.mouseDown({ x, y });
   }
 
   public mouseUp({ x, y }: ICoordinate): void {
@@ -138,6 +151,7 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     this.playButton.mouseEvent('up', { x, y });
     /* this.rankingButton.mouseEvent('up', { x, y }); */
     /* this.rateButton.mouseEvent('up', { x, y }); */
+    this.socialIcons.mouseUp({ x, y });
   }
 
   public startAtKeyBoardEvent(): void {

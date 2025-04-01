@@ -146,6 +146,10 @@ module.exports = function (env, config) {
             'postcss-loader',
             'sass-loader'
           ]
+        },
+        {
+          test: /\.svg$/,
+          type: 'asset/inline'
         }
       ]
     },

@@ -69,4 +69,21 @@ export default class PlayButton extends Parent {
     this.x = this.canvasSize.width * this.coordinate.x - scaled.width / 2;
     this.y = this.canvasSize.height * this.coordinate.y - scaled.height / 2;
   }
+
+  public mouseUp({ x, y }: ICoordinate): void {
+    if (!this.isPointInside({ x, y })) return;
+    
+    console.log('Botón Play clickeado');
+    
+    if (this.sfx) {
+      this.sfx.play('swoosh');
+    }
+    
+    if (typeof this.callback === 'function') {
+      console.log('Ejecutando callback del botón Play');
+      this.callback();
+    } else {
+      console.error('El callback del botón Play no está definido');
+    }
+  }
 }

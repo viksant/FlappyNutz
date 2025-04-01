@@ -1,26 +1,49 @@
 import ParentClass from '../abstracts/parent-class';
-import SpriteDestructor from '../lib/sprite-destructor';
-import { openInNewTab, rescaleDim } from '../utils';
+import { openInNewTab } from '../utils';
+
+// Importar los PNGs directamente
+import dexPng from '../assets/dex.png';
+import telegramPng from '../assets/telegram.png';
+import xPng from '../assets/x.png';
 
 export default class SocialIcons extends ParentClass {
-  private dexLogo: HTMLImageElement | undefined;
-  private telegramLogo: HTMLImageElement | undefined;
-  private xLogo: HTMLImageElement | undefined;
+  private dexLogo: HTMLImageElement;
+  private telegramLogo: HTMLImageElement;
+  private xLogo: HTMLImageElement;
   private iconSize: number = 0;
   private padding: number = 120; // Padding desde el fondo (120px)
   private spacing: number = 30; // Aumentado el espacio entre iconos
+  private iconsLoaded: boolean = false;
   
   constructor() {
     super();
-    this.dexLogo = void 0;
-    this.telegramLogo = void 0;
-    this.xLogo = void 0;
+    // Crear elementos de imagen
+    this.dexLogo = new Image();
+    this.telegramLogo = new Image();
+    this.xLogo = new Image();
+    
+    // Agregar event listeners para saber cuándo se cargan las imágenes
+    this.dexLogo.onload = () => this.checkIfAllImagesLoaded();
+    this.dexLogo.onerror = (e) => console.error('Error cargando dex.png', e);
+    
+    this.telegramLogo.onload = () => this.checkIfAllImagesLoaded();
+    this.telegramLogo.onerror = (e) => console.error('Error cargando telegram.png', e);
+    
+    this.xLogo.onload = () => this.checkIfAllImagesLoaded();
+    this.xLogo.onerror = (e) => console.error('Error cargando x.png', e);
+  }
+  
+  private checkIfAllImagesLoaded(): void {
+    if (this.dexLogo.complete && this.telegramLogo.complete && this.xLogo.complete) {
+      this.iconsLoaded = true;
+    }
   }
   
   public init(): void {
-    this.dexLogo = SpriteDestructor.asset('logo-dex');
-    this.telegramLogo = SpriteDestructor.asset('logo-telegram');
-    this.xLogo = SpriteDestructor.asset('logo-x');
+    // Cargar las imágenes PNG directamente
+    this.dexLogo.src = dexPng;
+    this.telegramLogo.src = telegramPng;
+    this.xLogo.src = xPng;
   }
   
   public resize({ width, height }: IDimension): void {
@@ -35,29 +58,24 @@ export default class SocialIcons extends ParentClass {
   }
   
   public Display(context: CanvasRenderingContext2D): void {
-    if (!this.dexLogo || !this.telegramLogo || !this.xLogo) return;
+    if (!this.iconsLoaded) return;
     
     const totalWidth = (this.iconSize * 3) + (this.spacing * 2);
     const startX = (this.canvasSize.width - totalWidth) / 2;
     const y = this.canvasSize.height - this.padding - this.iconSize;
     
-    // Dibujar Dex
-    this.drawIcon(context, this.dexLogo, startX, y);
-    
-    // Dibujar Telegram
-    this.drawIcon(context, this.telegramLogo, startX + this.iconSize + this.spacing, y);
-    
-    // Dibujar X
-    this.drawIcon(context, this.xLogo, startX + (this.iconSize * 2) + (this.spacing * 2), y);
-  }
-  
-  private drawIcon(context: CanvasRenderingContext2D, img: HTMLImageElement, x: number, y: number): void {
-    const scaled = rescaleDim(
-      { width: img.width, height: img.height },
-      { width: this.iconSize }
-    );
-    
-    context.drawImage(img, x, y, scaled.width, scaled.height);
+    try {
+      // Dibujar Dex
+      context.drawImage(this.dexLogo, startX, y, this.iconSize, this.iconSize);
+      
+      // Dibujar Telegram
+      context.drawImage(this.telegramLogo, startX + this.iconSize + this.spacing, y, this.iconSize, this.iconSize);
+      
+      // Dibujar X
+      context.drawImage(this.xLogo, startX + (this.iconSize * 2) + (this.spacing * 2), y, this.iconSize, this.iconSize);
+    } catch (error) {
+      console.error('Error al dibujar iconos PNG:', error);
+    }
   }
   
   public mouseDown({ x, y }: ICoordinate): void {

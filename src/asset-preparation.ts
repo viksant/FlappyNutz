@@ -46,8 +46,8 @@ export default (callback: IEmptyFunction): void => {
     sd.cutOut('number-md-5', 1004, 24, 14, 20);
     sd.cutOut('number-md-6', 1010, 52, 14, 20);
     sd.cutOut('number-md-7', 1010, 84, 14, 20);
-    sd.cutOut('number-md-8', 586, 484, 14, 20);
-    sd.cutOut('number-md-9', 622, 412, 14, 20);
+    sd.cutOut('number-md-8', 1010, 112, 14, 20);
+    sd.cutOut('number-md-9', 1010, 140, 14, 20);
     sd.cutOut('number-lg-0', 992, 120, 24, 36);
     sd.cutOut('number-lg-1', 272, 910, 16, 36);
     sd.cutOut('number-lg-2', 584, 320, 24, 36);
@@ -60,10 +60,11 @@ export default (callback: IEmptyFunction): void => {
     sd.cutOut('number-lg-9', 668, 368, 24, 36);
     sd.cutOut('toast-new', 224, 1002, 32, 14);
     sd.cutOut('btn-pause', 242, 612, 26, 28);
+    sd.cutOut('btn-play', 708, 236, 104, 58);
+    sd.cutOut('btn-ranking', 826, 236, 104, 58);
     sd.cutOut('btn-share', 584, 284, 80, 28);
-    sd.cutOut('btn-play-icon', 668, 284, 26, 28);
-    sd.cutOut('btn-play', 706, 236, 110, 64);
-    sd.cutOut('btn-ranking', 826, 236, 110, 64);
+    sd.cutOut('btn-score', 672, 284, 80, 28);
+    sd.cutOut('btn-start', 584, 234, 80, 28);
     sd.cutOut('btn-menu', 924, 52, 80, 28);
     sd.cutOut('btn-ok', 924, 84, 80, 28);
     /* sd.cutOut('btn-rate', 926, 2, 70, 44); */
@@ -87,9 +88,6 @@ export default (callback: IEmptyFunction): void => {
     sd.cutOut('icon-plus', 992, 168, 10, 10);
     sd.cutOut('btn-mute', 816, 306, 90, 66);
     sd.cutOut('btn-speaker', 712, 306, 90, 66);
-    sd.cutOut('logo-dex', 293, 517, 41, 41);
-    sd.cutOut('logo-telegram', 293, 566, 41, 41);
-    sd.cutOut('logo-x', 293, 614, 41, 41);
 
     const loadCallback = () => {
       if (isLoaded) callback();

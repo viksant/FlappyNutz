@@ -190,7 +190,11 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
   }
 
   public mouseDown({ x, y }: ICoordinate): void {
-    if (this.gameState === 'died') return;
+    if (this.gameState === 'died') {
+      this.scoreBoard.mouseDown({ x, y });
+      this.socialIcons.mouseDown({ x, y });
+      return;
+    }
 
     this.state = 'playing';
     this.gameState = 'playing';
@@ -207,5 +211,17 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
   }
   public startAtKeyBoardEvent(): void {
     if (this.gameState === 'died') this.scoreBoard.triggerPlayATKeyboardEvent();
+  }
+
+  private setupPlayButton(): void {
+    this.playButton.setCallback(() => {
+      console.log('Callback de Play ejecutado, reiniciando juego');
+      this.resetGame();
+    });
+  }
+
+  private resetGame(): void {
+    console.log('Reiniciando juego');
+    this.reset();
   }
 }

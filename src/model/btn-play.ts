@@ -1,6 +1,6 @@
 import Parent from '../abstracts/button-event-handler';
-import Sfx from './sfx';
 import SpriteDestructor from '../lib/sprite-destructor';
+import Sfx from './sfx';
 import { rescaleDim } from '../utils';
 
 export default class PlayButton extends Parent {
@@ -12,25 +12,24 @@ export default class PlayButton extends Parent {
 
   constructor() {
     super();
-    this.initialWidth = 0.38;
-    this.coordinate = {
-      x: 0.5,
-      y: 0.65
-    };
+    this.initialWidth = 0.24;
+    this.coordinate.x = 0.5;
+    this.coordinate.y = 0.45;
     this.active = true;
-  }
-
-  public click(): void {
-    Sfx.swoosh();
-    this.callback?.();
-  }
-
-  public onClick(callback: IEmptyFunction): void {
-    this.callback = callback;
   }
 
   public init(): void {
     this.img = SpriteDestructor.asset('btn-play');
+  }
+
+  public setCallback(cb: IEmptyFunction): void {
+    this.callback = cb;
+  }
+
+  public click(): void {
+    if (typeof this.callback === 'function') {
+      this.callback();
+    }
   }
 
   public Update(): void {
@@ -46,13 +45,13 @@ export default class PlayButton extends Parent {
     super.Update();
   }
 
-  public Display(context: CanvasRenderingContext2D): void {
+  public Display(ctx: CanvasRenderingContext2D): void {
     const xLoc = this.calcCoord.x;
     const yLoc = this.calcCoord.y;
     const xRad = this.dimension.width / 2;
     const yRad = this.dimension.height / 2;
 
-    context.drawImage(this.img!, xLoc - xRad, yLoc - yRad, xRad * 2, yRad * 2);
+    ctx.drawImage(this.img!, xLoc - xRad, yLoc - yRad, xRad * 2, yRad * 2);
   }
 
   public resize({ width, height }: IDimension): void {
@@ -71,13 +70,11 @@ export default class PlayButton extends Parent {
   }
 
   public mouseUp({ x, y }: ICoordinate): void {
-    if (!this.isPointInside({ x, y })) return;
+    if (!this.isInRange({ x, y })) return;
     
     console.log('Botón Play clickeado');
     
-    if (this.sfx) {
-      this.sfx.play('swoosh');
-    }
+    Sfx.swoosh();
     
     if (typeof this.callback === 'function') {
       console.log('Ejecutando callback del botón Play');

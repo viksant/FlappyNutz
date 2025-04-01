@@ -10,10 +10,10 @@ export default class SocialIcons extends ParentClass {
   private dexLogo: HTMLImageElement;
   private telegramLogo: HTMLImageElement;
   private xLogo: HTMLImageElement;
-  private iconSize: number = 0;
-  private padding: number = 120; // Padding desde el fondo (120px)
-  private spacing: number = 30; // Aumentado el espacio entre iconos
-  private iconsLoaded: boolean = false;
+  private iconSize = 0;
+  private padding = 120; // Padding desde el fondo (120px)
+  private spacing = 30; // Aumentado el espacio entre iconos
+  private iconsLoaded = false;
   
   constructor() {
     super();
@@ -129,6 +129,6 @@ export default class SocialIcons extends ParentClass {
     this.clickedIcon = '';
   }
   
-  private isClicked: boolean = false;
-  private clickedIcon: string = '';
+  private isClicked = false;
+  private clickedIcon = '';
 } 

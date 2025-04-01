@@ -213,13 +213,6 @@ export default class GetReady extends ParentClass implements IScreenChangerObjec
     if (this.gameState === 'died') this.scoreBoard.triggerPlayATKeyboardEvent();
   }
 
-  private setupPlayButton(): void {
-    this.playButton.setCallback(() => {
-      console.log('Callback de Play ejecutado, reiniciando juego');
-      this.resetGame();
-    });
-  }
-
   private resetGame(): void {
     console.log('Reiniciando juego');
     this.reset();

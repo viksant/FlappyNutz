@@ -29,6 +29,11 @@ export default class SocialIcons extends ParentClass {
     this.iconSize = Math.min(width * 0.15, 175); // 5 veces más grande (35px * 5 = 175px)
   }
   
+  // Implementando el método abstracto Update
+  public Update(): void {
+    // No necesitamos actualizar nada en cada frame
+  }
+  
   public Display(context: CanvasRenderingContext2D): void {
     if (!this.dexLogo || !this.telegramLogo || !this.xLogo) return;
     

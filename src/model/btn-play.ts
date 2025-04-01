@@ -1,9 +1,14 @@
 import Parent from '../abstracts/button-event-handler';
 import Sfx from './sfx';
 import SpriteDestructor from '../lib/sprite-destructor';
+import { rescaleDim } from '../utils';
 
 export default class PlayButton extends Parent {
   protected callback?: IEmptyFunction;
+  public x: number = 0;
+  public y: number = 0;
+  public width: number = 0;
+  public height: number = 0;
 
   constructor() {
     super();
@@ -48,5 +53,20 @@ export default class PlayButton extends Parent {
     const yRad = this.dimension.height / 2;
 
     context.drawImage(this.img!, xLoc - xRad, yLoc - yRad, xRad * 2, yRad * 2);
+  }
+
+  public resize({ width, height }: IDimension): void {
+    super.resize({ width, height });
+    
+    const scaled = rescaleDim(
+      { width: this.img!.width, height: this.img!.height },
+      { width: this.canvasSize.width * this.initialWidth }
+    );
+    
+    this.width = scaled.width;
+    this.height = scaled.height;
+    
+    this.x = this.canvasSize.width * this.coordinate.x - scaled.width / 2;
+    this.y = this.canvasSize.height * this.coordinate.y - scaled.height / 2;
   }
 }

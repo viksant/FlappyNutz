@@ -8,8 +8,8 @@ import PlayButton from '../model/btn-play';
 /* import RateButton from '../model/btn-rate'; */
 import ToggleSpeaker from '../model/btn-toggle-speaker';
 import SpriteDestructor from '../lib/sprite-destructor';
-import { APP_VERSION } from '../constants';
-
+/* import { APP_VERSION } from '../constants';
+ */
 export default class Introduction extends ParentClass implements IScreenChangerObject {
   public playButton: PlayButton;
   /* public rankingButton: RankingButton; */

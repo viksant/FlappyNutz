@@ -14,7 +14,7 @@ export default class PlayButton extends Parent {
     super();
     this.initialWidth = 0.28;
     this.coordinate.x = 0.5;
-    this.coordinate.y = 0.15;
+    this.coordinate.y = 0.65;
     this.active = true;
   }
 
@@ -65,12 +65,12 @@ export default class PlayButton extends Parent {
     this.width = scaled.width;
     this.height = scaled.height;
     
-    this.coordinate.y = 0.65;
-    
     this.x = this.canvasSize.width * this.coordinate.x - scaled.width / 2;
     this.y = this.canvasSize.height * this.coordinate.y - scaled.height / 2;
     
-    console.log('PlayButton resize:', this.coordinate.y, this.y);
+    this.calcCoord = { x: this.x + scaled.width / 2, y: this.y + scaled.height / 2 };
+    
+    console.log('PlayButton resize:', this.y);
   }
 
   public mouseUp({ x, y }: ICoordinate): void {

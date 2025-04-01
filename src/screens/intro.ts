@@ -48,14 +48,10 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     // Centrar el botón de play horizontalmente
     // this.playButton.x = (this.canvasSize.width / 2) - (this.playButton.width / 2);
     
-    // Agregar estas líneas para forzar la posición del botón
-    this.playButton.coordinate.y = 0.65; // Posición más baja
-    
-    // Asegurarse de que se llame al método resize
-    this.playButton.resize(this.canvasSize);
-
     // Forzar la posición después de resize
     this.playButton.resize(this.canvasSize);
+    
+    // Establecer la posición Y directamente usando la propiedad pública
     this.playButton.y = this.canvasSize.height * 0.65 - this.playButton.height / 2;
   }
 

@@ -20,11 +20,11 @@ const BANNER_INSTRUCTION: IBannerInstructionConst = {
   positions: {
     instructImage: {
       x: 0.5,
-      y: 0.515
+      y: 0.495  // Ajustar esta posición vertical si es necesario
     },
     getReadyImage: {
       x: 0.5,
-      y: 0.328
+      y: 0.328  // Ajustar esta posición vertical si es necesario
     }
   }
 };

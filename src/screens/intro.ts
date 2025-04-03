@@ -100,7 +100,7 @@ export default class Introduction extends ParentClass implements IScreenChangerO
     context.drawImage(
       this.flappyBirdBanner!,
       this.canvasSize.width * 0.5 - fbbScaled.width / 2,
-      this.canvasSize.height * 0.28 - fbbScaled.height / 2,
+      this.canvasSize.height * 0.20 - fbbScaled.height / 2,
       fbbScaled.width,
       fbbScaled.height
     );
